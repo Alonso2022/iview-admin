@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 import { login, logout, getUserInfo } from './login'
-import { getTableData, getDragList, uploadImage, getOrgData, getRoleList, getResouceList, getGroupList, getUserist } from './data'
+import { getTableData, getDragList, uploadImage, getOrgData, getTreeSelectData, getRoleList, getResouceList, getGroupList, getUserist } from './data'
 import { getMessageInit, getContentByMsgId, hasRead, removeReaded, restoreTrash, messageCount } from './user'
 
 // 配置Ajax请求延时，可用来测试网络延迟大时项目中一些效果
