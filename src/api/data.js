@@ -1,5 +1,33 @@
 import axios from '@/libs/api.request'
 
+export const getRoleList = () => {
+  return axios.request({
+    url: 'sys/get_role_list',
+    method: 'post'
+  })
+}
+
+export const getResouceList = () => {
+  return axios.request({
+    url: 'sys/get_resouce_list',
+    method: 'post'
+  })
+}
+
+export const getGroupList = () => {
+  return axios.request({
+    url: 'sys/get_group_list',
+    method: 'post'
+  })
+}
+
+export const getUserList = () => {
+  return axios.request({
+    url: 'sys/get_user_list',
+    method: 'post'
+  })
+}
+
 export const getTableData = () => {
   return axios.request({
     url: 'get_table_data',

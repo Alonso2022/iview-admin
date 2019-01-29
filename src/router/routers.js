@@ -78,6 +78,103 @@ export default [
       }
     ]
   },
+
+  {
+    path: '/system',
+    name: 'system',
+    component: Main,
+    meta: {
+      // hideInBread: true,
+      icon: 'md-settings',
+      title: '系统管理'
+    },
+    children: [
+      {
+        path: 'menu',
+        name: 'system_menu',
+        meta: {
+          icon: 'md-menu',
+          title: '菜单管理'
+        },
+        component: () => import('@/view/system/role/role.vue')
+      },
+      {
+        path: 'page',
+        name: 'system_page',
+        meta: {
+          icon: 'md-document',
+          title: '页面管理'
+        },
+        component: () => import('@/view/system/role/role.vue')
+      },
+      {
+        path: 'page_point',
+        name: 'system_page_point',
+        meta: {
+          icon: 'ios-keypad',
+          title: '功能点管理'
+        },
+        component: () => import('@/view/system/role/role.vue')
+      },
+
+      {
+        path: 'role',
+        name: 'system_role',
+        meta: {
+          icon: 'ios-archive',
+          title: '权限管理'
+        },
+        component: () => import('@/view/system/role/role.vue')
+      },
+      {
+        path: 'department',
+        name: 'system_department',
+        meta: {
+          icon: 'md-grid',
+          title: '部门管理'
+        },
+        component: () => import('@/view/system/role/role.vue')
+      },
+      {
+        path: 'department_position',
+        name: 'system_department_position',
+        meta: {
+          icon: 'ios-bulb',
+          title: '岗位管理'
+        },
+        component: () => import('@/view/system/group/group.vue')
+      },
+
+      {
+        path: 'config',
+        name: 'system_config',
+        meta: {
+          icon: 'md-list-box',
+          title: '配置管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      },
+      {
+        path: 'user',
+        name: 'system_user',
+        meta: {
+          icon: 'ios-contacts',
+          title: '用户'
+        },
+        component: () => import('@/view/system/user/user.vue')
+      },
+      {
+        path: 'dictionary',
+        name: 'system_dictionary',
+        meta: {
+          icon: 'ios-book',
+          title: '字典'
+        },
+        component: () => import('@/view/system/dictionary/dictionary.vue')
+      }
+    ]
+  },
+
   {
     path: '/message',
     name: 'message',

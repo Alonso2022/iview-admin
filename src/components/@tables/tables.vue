@@ -5,7 +5,9 @@
         <Option v-for="item in columns" v-if="item.key !== 'handle' && item.type!=='selection'" :value="item.key" :key="`search-col-${item.key}`">{{ item.title }}</Option>
       </Select>
       <Input @on-change="handleClear" clearable placeholder="输入关键字搜索" class="search-input" v-model="searchValue"/>
-      <Button @click="handleSearch" class="search-btn" type="primary"><Icon type="search"/>&nbsp;&nbsp;搜索</Button>
+      <Button @click="handleSearch" class="search-btn" type="primary" icon="ios-search">搜索</Button>
+      <Button @click="onDelete" class="search-btn" style="float:right" type="error" icon="md-close">删除</Button>
+      <Button @click="onCreate" class="search-btn" style="float:right" type="primary" icon="md-add">添加</Button>
     </div>
     <Table
       ref="tablesMain"
@@ -257,6 +259,12 @@ export default {
     },
     onExpand (row, status) {
       this.$emit('on-expand', row, status)
+    },
+    onCreate () {
+      this.$emit('on-create')
+    },
+    onDelete () {
+      this.$emit('on-delete')
     }
   },
   watch: {

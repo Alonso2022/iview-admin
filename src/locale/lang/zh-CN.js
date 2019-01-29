@@ -1,5 +1,50 @@
 export default {
+  ok: '确认',
+  cancel: '取消',
+  save: '保存',
+  submit: '提交',
+  goback: '退回',
+  reset: '重设',
+  add: '新增',
+  create: '创建',
+  edit: '编辑',
+  delete: '删除',
+  destory: '销毁',
+  restore: '恢复',
+  reply: '回复',
+  search: '搜索',
+  more: '更多',
+  detail: '明细',
+  general: '常规',
+  attachment: '附件',
+
+  // router local
   home: '首页',
+  system: '系统管理',
+
+  system_menu: '菜单管理',
+  system_page: '页面管理',
+  system_page_point: '功能点管理',
+  system_role: '权限管理',
+
+  system_department: '部门管理',
+  system_department_position: '岗位管理',
+
+  system_user: '用户管理',
+
+  system_dictionary: '字典管理',
+  system_config: '参数配置',
+
+  // router local end
+
+  // 数据记录属性面板 本地化 start
+  prop_role_user: '授权用户',
+  prop_role_item: '功能分配',
+  prop_user_role: '用户授权',
+  prop_user_group: '用户归岗',
+  prop_dic_child_item: '字典条目',
+  // 数据记录属性面板 本地化 end
+
   components: '组件',
   count_to_page: '数字渐变',
   tables_page: '多功能表格',
