@@ -23,6 +23,7 @@ Mock.mock(/\/message\/remove_readed/, removeReaded)
 Mock.mock(/\/message\/restore/, restoreTrash)
 Mock.mock(/\/message\/count/, messageCount)
 Mock.mock(/\/get_org_data/, getOrgData)
+Mock.mock(/\/get_tree_select_data/, getTreeSelectData)
 
 Mock.mock(/\/sys\/get_role_list/, getRoleList)
 Mock.mock(/\/sys\/get_resouce_list/, getResouceList)

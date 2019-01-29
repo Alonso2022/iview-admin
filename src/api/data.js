@@ -70,3 +70,10 @@ export const getOrgData = () => {
     method: 'get'
   })
 }
+
+export const getTreeSelectData = () => {
+  return axios.request({
+    url: 'get_tree_select_data',
+    method: 'get'
+  })
+}
