@@ -35,3 +35,18 @@
 }
 
 .ivu-table-cell .ivu-btn{ padding: 0 5px; }
+
+
+// start 修复左侧菜单 收起后展开过程中 出现下方滚动条，菜单内容被挤换行，图标显示问题
+.ivu-menu{
+    overflow: hidden;
+}
+.ivu-menu-vertical .ivu-menu-submenu-title-icon{
+    position: absolute;
+    top:18px;
+    right: 10px;
+}
+.ivu-menu-vertical .ivu-menu-item, .ivu-menu-vertical .ivu-menu-submenu-title{
+    white-space: nowrap
+}
+// end 
