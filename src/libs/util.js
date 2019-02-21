@@ -397,3 +397,47 @@ export const setTitle = (routeItem, vm) => {
   const resTitle = pageTitle ? `${title} - ${pageTitle}` : title
   window.document.title = resTitle
 }
+
+/* alonso 新增方法 */
+
+/**
+  *
+  * @description json对象转换成URL参数形式
+  * @param {*} json json对象转换成URL参数形式
+  * @returns
+  */
+export const param = (json) => {
+  if (!json) return ''
+  return cleanArray(
+    Object.keys(json).map(key => {
+      if (json[key] === undefined) return ''
+      return encodeURIComponent(key) + '=' + encodeURIComponent(json[key])
+    })
+  ).join('&')
+}
+
+/**
+ *  url参数转换成json对象
+ */
+export const param2Obj = (url) => {
+  const search = url.split('?')[1]
+  if (!search) {
+    return {}
+  }
+  return JSON.parse(
+    '{"' +
+      decodeURIComponent(search)
+        .replace(/"/g, '\\"')
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"') +
+      '"}'
+  )
+}
+
+/**
+ *  eval 替代函数
+ */
+export const evil = (fn) => {
+  var Fn = Function // 一个变量指向Function，防止有些前端编译工具报错
+  return new Fn('return ' + fn)()
+}

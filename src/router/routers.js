@@ -24,6 +24,7 @@ export default [
     meta: {
       title: 'Login - 登录',
       hideInMenu: true
+
     },
     component: () => import('@/view/login/login.vue')
   },
@@ -32,6 +33,7 @@ export default [
     name: '_home',
     redirect: '/home',
     component: Main,
+
     meta: {
       hideInMenu: true,
       notCache: true
@@ -89,6 +91,15 @@ export default [
       title: '系统管理'
     },
     children: [
+      {
+        path: 'gitee',
+        name: 'gitee',
+        component: () => import('@/view/iframe/index'),
+        meta: {
+          src: 'https://www.gitee.com',
+          title: 'gitee'
+        }
+      },
       {
         path: 'menu',
         name: 'system_menu',
