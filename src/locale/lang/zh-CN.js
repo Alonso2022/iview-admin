@@ -1,4 +1,5 @@
-export default {
+
+const common = {
   ok: '确认',
   cancel: '取消',
   save: '保存',
@@ -16,7 +17,37 @@ export default {
   more: '更多',
   detail: '明细',
   general: '常规',
-  attachment: '附件',
+  attachment: '附件'
+}
+
+const menu = {
+  menu: '菜单管理',
+  menu_list: '菜单列表',
+
+  module: '功能管理',
+  module_group: '功能组',
+  module_list: '功能点',
+
+  filter: '数据权限',
+  filter_condition: '数据条件',
+  filter_position: '岗位数据权限',
+
+  organization: '组织机构',
+  organization_list: '机构管理',
+  organization_position: '岗位管理',
+
+  user: '用户管理',
+  user_list: '用户管理',
+
+  joinup: '接入管理',
+  joinup_portal: '平台管理',
+  joinup_auth: '接入授权'
+
+}
+
+export default {
+  ...common,
+  ...menu,
 
   // router local
   home: '首页',

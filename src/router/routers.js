@@ -52,6 +52,134 @@ export default [
       }
     ]
   },
+
+  {
+    path: '/menu',
+    name: 'menu',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'menu_list',
+        meta: {
+          icon: 'md-menu',
+          title: '菜单管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      }
+    ]
+  },
+  {
+    path: '/module',
+    name: 'module',
+    component: Main,
+    meta: {
+      icon: 'md-menu',
+      title: '功能管理'
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'module_list',
+        meta: {
+          icon: 'md-menu',
+          title: '功能点管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      },
+      {
+        path: 'group',
+        name: 'module_group',
+        meta: {
+          icon: 'md-menu',
+          title: '功能组管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      }
+    ]
+  },
+  {
+    path: '/filter',
+    name: 'filter',
+    component: Main,
+    meta: {
+      icon: 'md-menu',
+      title: '数据权限'
+    },
+    children: [
+      {
+        path: 'filter_condition',
+        name: 'filter_condition',
+        meta: {
+          icon: 'md-menu',
+          title: '数据条件'
+        },
+        component: () => import('@/view/join-page.vue')
+      },
+      {
+        path: 'filter_position',
+        name: 'filter_position',
+        meta: {
+          icon: 'md-menu',
+          title: '岗位数据权限'
+        },
+        component: () => import('@/view/join-page.vue')
+      }
+    ]
+  },
+
+  {
+    path: '/organization',
+    name: 'organization',
+    component: Main,
+    meta: {
+      icon: 'md-menu',
+      title: '组织机构'
+    },
+    children: [
+      {
+        path: 'organization_list',
+        name: 'organization_list',
+        meta: {
+          icon: 'md-menu',
+          title: '机构管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      },
+      {
+        path: 'organization_position',
+        name: 'organization_position',
+        meta: {
+          icon: 'md-menu',
+          title: '岗位管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      }
+    ]
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: Main,
+    meta: {
+      icon: 'md-menu',
+      title: '用户管理'
+    },
+    children: [
+      {
+        path: 'user_list',
+        name: 'user_list',
+        meta: {
+          icon: 'md-menu',
+          title: '用户管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      }
+    ]
+  },
   {
     path: '',
     name: 'doc',
