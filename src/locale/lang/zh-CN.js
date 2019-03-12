@@ -1,4 +1,4 @@
-
+// 公共信息本地化
 const common = {
   ok: '确认',
   cancel: '取消',
@@ -20,7 +20,15 @@ const common = {
   attachment: '附件'
 }
 
-const menu = {
+// 系统级别的路由 本地化
+const systemRouters = {
+  home: '首页',
+  error_logger_page: '错误日志'
+}
+
+// 菜单本地化
+const menus = {
+
   menu: '菜单管理',
   menu_list: '菜单列表',
 
@@ -41,13 +49,18 @@ const menu = {
 
   joinup: '接入管理',
   joinup_portal: '平台管理',
-  joinup_auth: '接入授权'
+  joinup_auth: '接入授权',
+
+  stting: '系统设置',
+  dictionary: '字典管理',
+  config: '配置管理'
 
 }
 
 export default {
   ...common,
-  ...menu,
+  ...systemRouters,
+  ...menus,
 
   // router local
   home: '首页',
