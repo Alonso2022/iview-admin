@@ -24,6 +24,8 @@ const menus = [
     name: 'menu',
     component: Main,
     meta: {
+      icon: 'md-list',
+      title: '菜单管理',
       hideInBread: true
     },
     children: [
@@ -34,69 +36,31 @@ const menus = [
           icon: 'md-list',
           title: '菜单管理'
         },
-        component: () => import('@/view/join-page.vue')
+        component: () => import('@/view/system/menu/menu.vue')
       }
     ]
   },
   {
-    path: '/module',
-    name: 'module',
+    path: '/user',
+    name: 'user',
     component: Main,
     meta: {
-      icon: 'md-grid',
-      title: '功能管理'
+      icon: 'ios-people',
+      title: '用户管理',
+      hideInBread: true
     },
     children: [
       {
-        path: 'list',
-        name: 'module_list',
+        path: 'user_list',
+        name: 'user_list',
         meta: {
-          icon: 'md-browsers',
-          title: '功能点管理'
-        },
-        component: () => import('@/view/join-page.vue')
-      },
-      {
-        path: 'group',
-        name: 'module_group',
-        meta: {
-          icon: 'ios-browsers',
-          title: '功能组管理'
+          icon: 'ios-people',
+          title: '用户管理'
         },
         component: () => import('@/view/join-page.vue')
       }
     ]
   },
-  {
-    path: '/filter',
-    name: 'filter',
-    component: Main,
-    meta: {
-      icon: 'logo-buffer',
-      title: '数据权限'
-    },
-    children: [
-      {
-        path: 'filter_condition',
-        name: 'filter_condition',
-        meta: {
-          icon: 'md-code-working',
-          title: '数据条件'
-        },
-        component: () => import('@/view/join-page.vue')
-      },
-      {
-        path: 'filter_position',
-        name: 'filter_position',
-        meta: {
-          icon: 'md-code-download',
-          title: '岗位数据权限'
-        },
-        component: () => import('@/view/join-page.vue')
-      }
-    ]
-  },
-
   {
     path: '/organization',
     name: 'organization',
@@ -127,21 +91,76 @@ const menus = [
     ]
   },
   {
-    path: '/user',
-    name: 'user',
+    path: '/permission',
+    name: 'permission',
     component: Main,
     meta: {
-      icon: 'ios-people',
-      title: '用户管理',
-      hideInBread: true
+      icon: 'md-grid',
+      title: '权限管理'
     },
     children: [
       {
-        path: 'user_list',
-        name: 'user_list',
+        path: 'page',
+        name: 'page',
         meta: {
-          icon: 'ios-people',
-          title: '用户管理'
+          icon: 'md-browsers',
+          title: '功能管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      },
+      {
+        path: 'page_point',
+        name: 'page_point',
+        meta: {
+          icon: 'ios-bulb',
+          title: '功能点管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      },
+      {
+        path: 'role',
+        name: 'role',
+        meta: {
+          icon: 'ios-disc',
+          title: '角色管理'
+        },
+        component: () => import('@/view/join-page.vue')
+      },
+      {
+        path: 'data_filter',
+        name: 'data_filter',
+        meta: {
+          icon: 'md-code-working',
+          title: '数据条件'
+        },
+        component: () => import('@/view/join-page.vue')
+      }
+    ]
+  },
+  {
+    path: '/auth',
+    name: 'auth',
+    component: Main,
+    meta: {
+      icon: 'md-flame',
+      title: '授权管理'
+    },
+    children: [
+      {
+        path: 'position_auth',
+        name: 'position_auth',
+        meta: {
+          icon: 'md-done-all',
+          title: '岗位授权'
+        },
+        component: () => import('@/view/join-page.vue')
+      },
+      {
+        path: 'user_auth',
+        name: 'user_auth',
+        meta: {
+          icon: 'md-done-all',
+          title: '用户授权'
         },
         component: () => import('@/view/join-page.vue')
       }
@@ -157,28 +176,28 @@ const menus = [
     },
     children: [
       {
-        path: 'joinup_portal',
-        name: 'joinup_portal',
+        path: 'platform',
+        name: 'platform',
         meta: {
           icon: 'md-albums',
           title: '接入平台'
         },
-        component: () => import('@/view/join-page.vue')
+        component: () => import('@/view/system/platform/platform.vue')
       },
       {
         path: 'joinup_auth',
         name: 'joinup_auth',
         meta: {
-          icon: 'md-done-all',
-          title: '授权管理'
+          icon: 'md-medical',
+          title: '接入授权'
         },
-        component: () => import('@/view/join-page.vue')
+        component: () => import('@/view/system/join-up/join-up.vue')
       }
     ]
   },
   {
-    path: '/stting',
-    name: 'stting',
+    path: '/setting',
+    name: 'setting',
     component: Main,
     meta: {
       icon: 'md-settings',
@@ -192,7 +211,7 @@ const menus = [
           icon: 'ios-apps',
           title: '字典管理'
         },
-        component: () => import('@/view/join-page.vue')
+        component: () => import('@/view/system/dictionary/dictionary.vue')
       },
       {
         path: 'config',
@@ -201,7 +220,7 @@ const menus = [
           icon: 'md-cog',
           title: '系统配置'
         },
-        component: () => import('@/view/join-page.vue')
+        component: () => import('@/view/system/setting/setting.vue')
       }
     ]
   }
@@ -712,108 +731,27 @@ export default [
   ...originRouters,
 
   {
-    path: '/system',
-    name: 'system',
-    component: Main,
+    path: '/401',
+    name: 'error_401',
     meta: {
-      // hideInBread: true,
-      icon: 'md-settings',
-      title: '系统管理'
+      hideInMenu: true
     },
-    children: [
-      {
-        path: 'gitee',
-        name: 'gitee',
-        component: () => import('@/view/iframe/index'),
-        meta: {
-          src: 'https://www.gitee.com',
-          title: 'gitee'
-        }
-      },
-      {
-        path: 'menu',
-        name: 'system_menu',
-        meta: {
-          icon: 'md-menu',
-          title: '菜单管理'
-        },
-        component: () => import('@/view/system/role/role.vue')
-      },
-      {
-        path: 'page',
-        name: 'system_page',
-        meta: {
-          icon: 'md-document',
-          title: '页面管理'
-        },
-        component: () => import('@/view/system/role/role.vue')
-      },
-      {
-        path: 'page_point',
-        name: 'system_page_point',
-        meta: {
-          icon: 'ios-keypad',
-          title: '功能点管理'
-        },
-        component: () => import('@/view/system/role/role.vue')
-      },
-
-      {
-        path: 'role',
-        name: 'system_role',
-        meta: {
-          icon: 'ios-archive',
-          title: '权限管理'
-        },
-        component: () => import('@/view/system/role/role.vue')
-      },
-      {
-        path: 'department',
-        name: 'system_department',
-        meta: {
-          icon: 'md-grid',
-          title: '部门管理'
-        },
-        component: () => import('@/view/system/role/role.vue')
-      },
-      {
-        path: 'department_position',
-        name: 'system_department_position',
-        meta: {
-          icon: 'ios-bulb',
-          title: '岗位管理'
-        },
-        component: () => import('@/view/system/group/group.vue')
-      },
-
-      {
-        path: 'config',
-        name: 'system_config',
-        meta: {
-          icon: 'md-list-box',
-          title: '配置管理'
-        },
-        component: () => import('@/view/join-page.vue')
-      },
-      {
-        path: 'user',
-        name: 'system_user',
-        meta: {
-          icon: 'ios-contacts',
-          title: '用户'
-        },
-        component: () => import('@/view/system/user/user.vue')
-      },
-      {
-        path: 'dictionary',
-        name: 'system_dictionary',
-        meta: {
-          icon: 'ios-book',
-          title: '字典'
-        },
-        component: () => import('@/view/system/dictionary/dictionary.vue')
-      }
-    ]
+    component: () => import('@/view/error-page/401.vue')
+  },
+  {
+    path: '/500',
+    name: 'error_500',
+    meta: {
+      hideInMenu: true
+    },
+    component: () => import('@/view/error-page/500.vue')
+  },
+  {
+    path: '*',
+    name: 'error_404',
+    meta: {
+      hideInMenu: true
+    },
+    component: () => import('@/view/error-page/404.vue')
   }
-
 ]

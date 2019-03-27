@@ -1,7 +1,12 @@
+import { local as joinUpLocaL } from './zh-CN/system.join-up'
+import { local as platformLocaL } from './zh-CN/system.platform'
+import { local as settingLocaL } from './zh-CN/system.setting'
+
 // 公共信息本地化
 const common = {
   ok: '确认',
   cancel: '取消',
+  apply: '应用',
   save: '保存',
   submit: '提交',
   goback: '退回',
@@ -17,7 +22,63 @@ const common = {
   more: '更多',
   detail: '明细',
   general: '常规',
-  attachment: '附件'
+  attachment: '附件',
+  test: '测试',
+  success: '成功',
+  error: '出错了',
+  warning: '警告',
+  failure: '失败',
+  loading: '载入中...',
+  date: '日期',
+  register: '注册',
+  enable: '启用',
+  disable: '禁用',
+  operation: '操作',
+  open: '打开',
+  close: '关闭',
+  yes: '是',
+  no: '否',
+  true: '真',
+  false: '假',
+
+  menu: '菜单',
+  value: '值',
+  code: '编码',
+  'token': '令牌',
+  'app-id': 'APP ID',
+  'secret-key': '秘钥',
+  'domain': '域',
+  'title': '标题',
+  'name': '名称',
+  'description': '描述',
+  'create-by': '创建人',
+  'create-on': '创建时间',
+  'modify_by': '修改人',
+  'modify_on': '修改时间',
+  'is_disable': '禁用标记',
+  'is_delete': '删除标记',
+
+  'create-success': '创建成功',
+  'create-failure': '创建失败',
+  'edit-success': '编辑成功',
+  'edit-failure': '编辑失败',
+  'apply-success': '应用成功',
+  'apply-failure': '应用失败',
+  'submit-success': '提交成功',
+  'submit-failure': '提交失败',
+
+  'check-in': '登记',
+
+  'search-key-empty-msg': '搜索关键字不能为空',
+  'confirm-del': '确认删除',
+  'confirm-del-content': '删除过后无法找回，确认删除吗?',
+  'need-select-least-one': '需要选择至少一行记录',
+  'advance-search': '高级搜索',
+  'enter-search-key': '请输入关键字',
+  'set-display-cols': '设置显示列',
+  'send-to-api': '提交数据到API',
+  'server-response': 'API响应完成'
+
 }
 
 // 系统级别的路由 本地化
@@ -29,29 +90,38 @@ const systemRouters = {
 // 菜单本地化
 const menus = {
 
+  // 菜单管理
   menu: '菜单管理',
-  menu_list: '菜单列表',
+  menu_list: '菜单管理',
 
-  module: '功能管理',
-  module_group: '功能组',
-  module_list: '功能点',
+  // 权限管理
+  permission: '权限管理',
+  page: '功能管理',
+  page_point: '功能点管理',
+  role: '角色管理',
+  data_filter: '数据权限',
 
-  filter: '数据权限',
-  filter_condition: '数据条件',
-  filter_position: '岗位数据权限',
+  // 用户管理
+  user: '用户管理',
+  user_list: '用户管理',
 
+  // 组织机构管理
   organization: '组织机构',
   organization_list: '机构管理',
   organization_position: '岗位管理',
 
-  user: '用户管理',
-  user_list: '用户管理',
+  // 授权管理
+  auth: '授权管理',
+  position_auth: '岗位授权',
+  user_auth: '用户授权',
 
+  // 接入管理
   joinup: '接入管理',
-  joinup_portal: '平台管理',
-  joinup_auth: '接入授权',
+  platform: '平台管理',
+  joinup_auth: '接入登记',
 
-  stting: '系统设置',
+  // 系统设置
+  setting: '系统设置',
   dictionary: '字典管理',
   config: '配置管理'
 
@@ -61,73 +131,8 @@ export default {
   ...common,
   ...systemRouters,
   ...menus,
+  'join-up-lang': joinUpLocaL,
+  'platform-lang': platformLocaL,
+  'setting-lang': settingLocaL
 
-  // router local
-  home: '首页',
-  system: '系统管理',
-
-  system_menu: '菜单管理',
-  system_page: '页面管理',
-  system_page_point: '功能点管理',
-  system_role: '权限管理',
-
-  system_department: '部门管理',
-  system_department_position: '岗位管理',
-
-  system_user: '用户管理',
-
-  system_dictionary: '字典管理',
-  system_config: '参数配置',
-
-  // router local end
-
-  // 数据记录属性面板 本地化 start
-  prop_role_user: '授权用户',
-  prop_role_item: '功能分配',
-  prop_user_role: '用户授权',
-  prop_user_group: '用户归岗',
-  prop_dic_child_item: '字典条目',
-  // 数据记录属性面板 本地化 end
-
-  components: '组件',
-  count_to_page: '数字渐变',
-  tables_page: '多功能表格',
-  split_pane_page: '分割窗口',
-  markdown_page: 'Markdown编辑器',
-  editor_page: '富文本编辑器',
-  icons_page: '自定义图标',
-  img_cropper_page: '图片编辑器',
-  update: '上传数据',
-  join_page: 'QQ群',
-  doc: '文档',
-  update_table_page: '上传CSV文件',
-  update_paste_page: '粘贴表格数据',
-  multilevel: '多级菜单',
-  directive_page: '指令',
-  level_1: 'Level-1',
-  level_2: 'Level-2',
-  level_2_1: 'Level-2-1',
-  level_2_3: 'Level-2-3',
-  level_2_2: 'Level-2-2',
-  level_2_2_1: 'Level-2-2-1',
-  level_2_2_2: 'Level-2-2-2',
-  excel: 'Excel',
-  'upload-excel': '上传excel',
-  'export-excel': '导出excel',
-  tools_methods_page: '工具函数',
-  drag_list_page: '拖拽列表',
-  i18n_page: '多语言',
-  modalTitle: '模态框题目',
-  content: '这是模态框内容',
-  buttonText: '显示模态框',
-  'i18n-tip': '注：仅此页做了多语言，其他页面没有在多语言包中添加语言内容',
-  error_store_page: '错误收集',
-  error_logger_page: '错误日志',
-  query: '带参路由',
-  params: '动态路由',
-  cropper_page: '图片裁剪',
-  message_page: '消息中心',
-  tree_table_page: '树状表格',
-  org_tree_page: '组织结构树',
-  drag_drawer_page: '可拖动抽屉'
 }

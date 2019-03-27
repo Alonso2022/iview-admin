@@ -2,6 +2,9 @@ import Mock from 'mockjs'
 import { login, logout, getUserInfo } from './login'
 import { getTableData, getDragList, uploadImage, getOrgData, getTreeSelectData, getRoleList, getResouceList, getGroupList, getUserist } from './data'
 import { getMessageInit, getContentByMsgId, hasRead, removeReaded, restoreTrash, messageCount } from './user'
+import { getJoinAuthList } from './system/join-up/data'
+import { getPlatformList } from './system/platform/data'
+import { getConfigList } from './system/setting/data'
 
 // 配置Ajax请求延时，可用来测试网络延迟大时项目中一些效果
 Mock.setup({
@@ -25,9 +28,15 @@ Mock.mock(/\/message\/count/, messageCount)
 Mock.mock(/\/get_org_data/, getOrgData)
 Mock.mock(/\/get_tree_select_data/, getTreeSelectData)
 
+//
 Mock.mock(/\/sys\/get_role_list/, getRoleList)
 Mock.mock(/\/sys\/get_resouce_list/, getResouceList)
 Mock.mock(/\/sys\/get_group_list/, getGroupList)
 Mock.mock(/\/sys\/get_user_list/, getUserist)
+
+Mock.mock(/\/sys\/get_join_auth_list/, getJoinAuthList)
+Mock.mock(/\/sys\/get_platform_list/, getPlatformList)
+Mock.mock(/\/sys\/get_config_list/, getConfigList
+)
 
 export default Mock

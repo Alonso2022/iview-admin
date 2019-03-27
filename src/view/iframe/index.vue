@@ -106,12 +106,12 @@ export default {
 .mainRooter{
   margin: -18px;
   > .iframe {
-  width: 100%;
-  min-height: 100%;
-  border: 0;
-  overflow: hidden;
-  box-sizing: border-box;
-}
+    width: 100%;
+    min-height: 100%;
+    border: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
 }
 
 </style>
