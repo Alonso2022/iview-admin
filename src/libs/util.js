@@ -94,6 +94,10 @@ export const getRouteTitleHandled = (route) => {
 }
 
 export const showTitle = (item, vm) => {
+  // if (item === 'home') {
+  //   console.log('title', item)
+  // }
+
   let { title, __titleIsFunction__ } = item.meta
   if (!title) return
   if (useI18n) {

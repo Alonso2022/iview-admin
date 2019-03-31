@@ -6,8 +6,8 @@
           <template slot-scope="{ row, index }" slot="VALUE">
               <span v-if="editItem.editIndex === index">
                 <i-switch v-if="row.DATA_TYPE === 'BOOLEAN'" v-model="editItem.formData.VALUE" size="large">
-                  <span slot="open">{{$t('yes')}}</span>
-                  <span slot="close">{{$t('no')}}</span>
+                  <span slot="open">{{$t('是')}}</span>
+                  <span slot="close">{{$t('否')}}</span>
                 </i-switch>
                 <DatePicker v-else-if="row.DATA_TYPE === 'DATE'" format="yyyy-MM-dd HH:mm:ss" type="datetime" v-model="editItem.formData.VALUE"  placeholder="" style="width: 200px"></DatePicker>
                 <InputNumber v-else-if="row.DATA_TYPE === 'NUMBER'" v-model="editItem.formData.VALUE"></InputNumber>
@@ -17,8 +17,8 @@
               <span v-else>
                 <span v-if="row.DATA_TYPE === 'BOOLEAN'">
                   <i-switch v-if="row.DATA_TYPE === 'BOOLEAN'" v-model="row.VALUE" disabled  size="large">
-                    <span slot="open">{{$t('yes')}}</span>
-                    <span slot="close">{{$t('no')}}</span>
+                    <span slot="open">{{$t('是')}}</span>
+                    <span slot="close">{{$t('否')}}</span>
                   </i-switch>
                 </span>
                 <span v-else>{{ row.VALUE }}</span>
@@ -28,14 +28,14 @@
           <template slot-scope="{ row, index }" slot="action">
             <div v-if="editItem.editIndex === index">
               <ButtonGroup size="small" >
-                <Button @click="onSave(row, index)"  icon="md-checkmark" type="info"  :title="$t('save')"></Button>
-                <Button @click="editItem.editIndex=-1"  icon="md-close" type="default" :title="$t('cancel')"></Button>
+                <Button @click="onSave(row, index)"  type="warning"  :title="$t('保存')">{{$t('保存')}}</Button>
+                <Button @click="editItem.editIndex=-1"  type="default" :title="$t('取消')">{{$t('取消')}}</Button>
               </ButtonGroup>
             </div>
             <div v-else>
               <ButtonGroup size="small" >
-                <Button @click="onEdit(row, index)"  icon="ios-create" type="primary"  :title="$t('edit')"></Button>
-                <Button :disabled="row.CONFIG_TYPE === 'SYSTEM'" @click="onDelete(row, index)"  icon="md-close" type="warning" :title="row.CONFIG_TYPE === 'SYSTEM'?'系统配置不允许删除':$t('delete')"></Button>
+                <Button @click="onEdit(row, index)"  type="primary"  :title="$t('编辑')">{{$t('编辑')}}</Button>
+                <Button :disabled="row.CONFIG_TYPE === 'SYSTEM'" @click="onDelete(row, index)"  type="error" :title="row.CONFIG_TYPE === 'SYSTEM'?$t('系统配置不允许删除'):$t('删除')">{{$t('删除')}}</Button>
               </ButtonGroup>
             </div>
           </template>
@@ -63,42 +63,40 @@ export default {
           title: '#',
           width: 40,
           className: 'action-column',
-          fixed: 'left',
+          // fixed: 'left',
           render: (h, params) => {
             return h('span', params.index + (this.paras.currentPage - 1) * this.paras.pageSize + 1)
           }
         },
 
         {
-          title: this.$t('code'),
           key: 'CODE',
           sortable: false,
-          fixed: 'left',
+          // fixed: 'left',
           width: 150,
           renderHeader: (h, params) => {
-            return h('span', this.$t('code')) // 多语言切换 需要用到renderHeader 否则可以不用
+            return h('span', this.$t('编码')) // 多语言切换 需要用到renderHeader 否则可以不用
           }
         },
         {
-          title: this.$t('setting-lang.config-type'),
           key: 'CONFIG_TYPE',
           sortable: true,
           width: 150,
-          fixed: 'left',
+          // fixed: 'left',
           renderHeader: (h, params) => {
-            return h('span', this.$t('setting-lang.config-type')) // 多语言切换 需要用到renderHeader 否则可以不用
+            return h('span', this.$t('配置类型')) // 多语言切换 需要用到renderHeader 否则可以不用
           },
           filters: [
             {
-              label: '系统',
+              label: this.$t('系统'),
               value: 'SYSTEM'
             },
             {
-              label: '岗位',
+              label: this.$t('岗位'),
               value: 'POSITION'
             },
             {
-              label: '用户',
+              label: this.$t('用户'),
               value: 'USER'
             }
           ],
@@ -108,49 +106,44 @@ export default {
           }
         },
         {
-          title: this.$t('setting-lang.target'),
           key: 'TARGET',
           sortable: false,
-          fixed: 'left',
+          // fixed: 'left',
           width: 150,
           renderHeader: (h, params) => {
-            return h('span', this.$t('setting-lang.target')) // 多语言切换 需要用到renderHeader 否则可以不用
+            return h('span', this.$t('主体')) // 多语言切换 需要用到renderHeader 否则可以不用
           }
         },
+        // {
+        //   key: 'DATA_TYPE',
+        //   sortable: true,
+        //   width: 120,
+        //   renderHeader: (h, params) => {
+        //     return h('span', this.$t('数据类型')) // 多语言切换 需要用到renderHeader 否则可以不用
+        //   }
+        // },
         {
-          title: this.$t('setting-lang.data-type'),
-          key: 'DATA_TYPE',
-          sortable: true,
-          width: 120,
-          renderHeader: (h, params) => {
-            return h('span', this.$t('setting-lang.data-type')) // 多语言切换 需要用到renderHeader 否则可以不用
-          }
-        },
-        {
-          title: this.$t('description'),
           key: 'DESCRIPTION',
           sortable: false,
           renderHeader: (h, params) => {
             // 多语言切换 需要用到renderHeader 否则可以不用
-            return h('span', this.$t('description'))
+            return h('span', this.$t('描述'))
           }
         },
         {
-          title: this.$t('value'),
           slot: 'VALUE',
           sortable: false,
           renderHeader: (h, params) => {
-            return h('span', this.$t('value')) // 多语言切换 需要用到renderHeader 否则可以不用
+            return h('span', this.$t('值')) // 多语言切换 需要用到renderHeader 否则可以不用
           }
         },
         {
-          title: this.$t('operation'),
           slot: 'action',
-          fixed: 'right',
-          width: 86,
+          // fixed: 'right',
+          width: 110,
           className: 'action-column',
           renderHeader: (h, params) => {
-            return h('span', this.$t('operation')) // 多语言切换 需要用到renderHeader 否则可以不用
+            return h('span', this.$t('操作')) // 多语言切换 需要用到renderHeader 否则可以不用
           }
         }
       ],
@@ -158,7 +151,7 @@ export default {
       key: '', // 搜索关键字
       loading: false,
       selectedItems: [],
-      createPanlTitle: this.$t('create'),
+      createPanlTitle: this.$t('创建'),
       editItem: {
         editIndex: -1,
         formData: { }
@@ -186,7 +179,7 @@ export default {
           this.data = res.data.data
         } else {
           this.$Notice.error({
-            title: this.$t('error'),
+            title: this.$t('错误'),
             desc: res.data.msg
           })
         }
@@ -206,20 +199,20 @@ export default {
     onDelete (row, index) {
       // 确认删除对话框
       this.$Modal.confirm({
-        title: this.$t('confirm-del'),
-        content: this.$t('confirm-del-content'),
+        title: this.$t('删除确认'),
+        content: this.$t('确认删除指定记录吗?'),
         onOk: this.execDelete,
         loading: true,
-        okText: this.$t('delete'),
-        cancelText: this.$t('cancel')
+        okText: this.$t('删除'),
+        cancelText: this.$t('取消')
       })
     },
     execDelete () {
       // 提交数据到API
       setTimeout(() => {
         this.$Notice.success({
-          title: this.$t('success'),
-          desc: this.$t('server-response')
+          title: this.$t('成功'),
+          desc: this.$t('API响应完成')
         })
         // 关闭删除确认窗口
         this.$Modal.remove()
@@ -243,8 +236,8 @@ export default {
       // 提交数据到API
       setTimeout(() => {
         this.$Notice.success({
-          title: this.$t('edit-success'),
-          desc: this.$t('server-response')
+          title: this.$t('编辑成功'),
+          desc: this.$t('API响应完成')
         })
 
         this.data[index].VALUE = newValue

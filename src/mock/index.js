@@ -5,6 +5,7 @@ import { getMessageInit, getContentByMsgId, hasRead, removeReaded, restoreTrash,
 import { getJoinAuthList } from './system/join-up/data'
 import { getPlatformList } from './system/platform/data'
 import { getConfigList } from './system/setting/data'
+import { getDictionaryList } from './system/dictionary/data'
 
 // 配置Ajax请求延时，可用来测试网络延迟大时项目中一些效果
 Mock.setup({
@@ -36,7 +37,7 @@ Mock.mock(/\/sys\/get_user_list/, getUserist)
 
 Mock.mock(/\/sys\/get_join_auth_list/, getJoinAuthList)
 Mock.mock(/\/sys\/get_platform_list/, getPlatformList)
-Mock.mock(/\/sys\/get_config_list/, getConfigList
-)
+Mock.mock(/\/sys\/get_config_list/, getConfigList)
+Mock.mock(/\/sys\/get_dictionary_list/, getDictionaryList)
 
 export default Mock

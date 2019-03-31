@@ -8,13 +8,15 @@
             :title="panlTitle"
             :width="panlWidth"
             :mask-closable="true"
-            :draggable ='true' >
+            :draggable ='true'
+            :class-name="className"
+            >
 
             <slot>
 
             </slot>
 
-            <div class="demo-drawer-footer">
+            <div class="demo-drawer-footer" v-if="footerHide===false" >
               <i-button type="primary" @click="onOk">{{ this.okTitle }}</i-button>
               <i-button style="margin-left: 8px" @click="onCancel">{{ this.cancelTitle }}</i-button>
             </div>
@@ -27,11 +29,14 @@
             :title="panlTitle"
             :ok-text="okTitle"
             :cancel-text="cancelTitle"
+            :class-name="className"
+            :footer-hide="footerHide"
+
             >
             <slot>
 
             </slot>
-            <div slot="footer">
+            <div slot="footer" v-if="footerHide===false" >
               <i-button type="primary" @click="onOk">{{ this.okTitle }}</i-button>
               <i-button style="margin-left: 8px" @click="onCancel">{{ this.cancelTitle }}</i-button>
             </div>
@@ -81,8 +86,15 @@ export default {
     cancelTitle: {
       type: [String],
       default: '取消'
+    },
+    className: {
+      type: [String],
+      default: ''
+    },
+    footerHide: {
+      type: Boolean,
+      default: false
     }
-
   },
   data () {
     return {

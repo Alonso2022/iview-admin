@@ -25,7 +25,7 @@ const menus = [
     component: Main,
     meta: {
       icon: 'md-list',
-      title: '菜单管理',
+      title: '{{菜单管理}}',
       hideInBread: true
     },
     children: [
@@ -34,7 +34,7 @@ const menus = [
         name: 'menu_list',
         meta: {
           icon: 'md-list',
-          title: '菜单管理'
+          title: '{{菜单管理}}'
         },
         component: () => import('@/view/system/menu/menu.vue')
       }
@@ -46,16 +46,16 @@ const menus = [
     component: Main,
     meta: {
       icon: 'ios-people',
-      title: '用户管理',
+      title: '{{用户管理}}',
       hideInBread: true
     },
     children: [
       {
-        path: 'user_list',
+        path: 'list',
         name: 'user_list',
         meta: {
           icon: 'ios-people',
-          title: '用户管理'
+          title: '{{用户管理}}'
         },
         component: () => import('@/view/join-page.vue')
       }
@@ -67,24 +67,24 @@ const menus = [
     component: Main,
     meta: {
       icon: 'ios-infinite',
-      title: '组织机构'
+      title: '{{组织机构}}'
     },
     children: [
       {
-        path: 'organization_list',
+        path: 'list',
         name: 'organization_list',
         meta: {
           icon: 'md-cube',
-          title: '机构管理'
+          title: '{{机构管理}}'
         },
         component: () => import('@/view/join-page.vue')
       },
       {
-        path: 'organization_position',
+        path: 'position',
         name: 'organization_position',
         meta: {
           icon: 'ios-contact',
-          title: '岗位管理'
+          title: '{{岗位管理}}'
         },
         component: () => import('@/view/join-page.vue')
       }
@@ -96,7 +96,7 @@ const menus = [
     component: Main,
     meta: {
       icon: 'md-grid',
-      title: '权限管理'
+      title: '{{权限管理}}'
     },
     children: [
       {
@@ -104,7 +104,7 @@ const menus = [
         name: 'page',
         meta: {
           icon: 'md-browsers',
-          title: '功能管理'
+          title: '{{功能管理}}'
         },
         component: () => import('@/view/join-page.vue')
       },
@@ -113,7 +113,7 @@ const menus = [
         name: 'page_point',
         meta: {
           icon: 'ios-bulb',
-          title: '功能点管理'
+          title: '{{功能点管理}}'
         },
         component: () => import('@/view/join-page.vue')
       },
@@ -122,7 +122,7 @@ const menus = [
         name: 'role',
         meta: {
           icon: 'ios-disc',
-          title: '角色管理'
+          title: '{{角色管理}}'
         },
         component: () => import('@/view/join-page.vue')
       },
@@ -131,7 +131,7 @@ const menus = [
         name: 'data_filter',
         meta: {
           icon: 'md-code-working',
-          title: '数据条件'
+          title: '{{数据条件}}'
         },
         component: () => import('@/view/join-page.vue')
       }
@@ -143,7 +143,7 @@ const menus = [
     component: Main,
     meta: {
       icon: 'md-flame',
-      title: '授权管理'
+      title: '{{授权管理}}'
     },
     children: [
       {
@@ -151,7 +151,7 @@ const menus = [
         name: 'position_auth',
         meta: {
           icon: 'md-done-all',
-          title: '岗位授权'
+          title: '{{岗位授权}}'
         },
         component: () => import('@/view/join-page.vue')
       },
@@ -160,7 +160,7 @@ const menus = [
         name: 'user_auth',
         meta: {
           icon: 'md-done-all',
-          title: '用户授权'
+          title: '{{用户授权}}'
         },
         component: () => import('@/view/join-page.vue')
       }
@@ -172,7 +172,7 @@ const menus = [
     component: Main,
     meta: {
       icon: 'md-git-network',
-      title: '接入管理'
+      title: '{{接入管理}}'
     },
     children: [
       {
@@ -180,7 +180,7 @@ const menus = [
         name: 'platform',
         meta: {
           icon: 'md-albums',
-          title: '接入平台'
+          title: '{{平台管理}}'
         },
         component: () => import('@/view/system/platform/platform.vue')
       },
@@ -189,7 +189,7 @@ const menus = [
         name: 'joinup_auth',
         meta: {
           icon: 'md-medical',
-          title: '接入授权'
+          title: '{{接入登记}}'
         },
         component: () => import('@/view/system/join-up/join-up.vue')
       }
@@ -201,7 +201,7 @@ const menus = [
     component: Main,
     meta: {
       icon: 'md-settings',
-      title: '系统设置'
+      title: '{{系统配置}}'
     },
     children: [
       {
@@ -209,7 +209,7 @@ const menus = [
         name: 'dictionary',
         meta: {
           icon: 'ios-apps',
-          title: '字典管理'
+          title: '{{字典管理}}'
         },
         component: () => import('@/view/system/dictionary/dictionary.vue')
       },
@@ -218,7 +218,7 @@ const menus = [
         name: 'config',
         meta: {
           icon: 'md-cog',
-          title: '系统配置'
+          title: '{{系统配置}}'
         },
         component: () => import('@/view/system/setting/setting.vue')
       }
@@ -231,7 +231,7 @@ const systemRouters = [
     path: '/login',
     name: 'login',
     meta: {
-      title: 'Login - 登录',
+      title: '{{登录}}',
       hideInMenu: true
 
     },
@@ -244,7 +244,9 @@ const systemRouters = [
     component: Main,
     meta: {
       hideInMenu: true,
-      notCache: true
+      hideInBread: true,
+      notCache: true,
+      title: '{{首页}}'
     },
     children: [
       {
@@ -252,7 +254,8 @@ const systemRouters = [
         name: 'home',
         meta: {
           hideInMenu: true,
-          title: '首页',
+          hideInBread: true,
+          title: '{{首页}}',
           notCache: true,
           icon: 'md-home'
         },
@@ -274,7 +277,7 @@ const systemRouters = [
         name: 'error_logger_page',
         meta: {
           icon: 'ios-bug',
-          title: '错误收集'
+          title: '{{错误收集}}'
         },
         component: () => import('@/view/single-page/error-logger.vue')
       }
