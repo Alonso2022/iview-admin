@@ -97,6 +97,8 @@ const common = {
   '创建失败': 'Create Failure',
   '编辑成功': 'Edit Success',
   '编辑失败': 'Edit Failure',
+  '删除成功': 'Delete Success',
+  '删除失败': 'Delete Failure',
   '应用成功': 'Apply Success',
   '应用失败': 'Apply Failure',
   '提交成功': 'Submit Success',
@@ -121,6 +123,11 @@ const common = {
   '配置类型': 'Config Type',
   '数据类型': 'Data Type',
   '主体': 'Target',
+
+  '文本型': 'Text',
+  '日期型': 'Date',
+  '数字型': 'Number',
+  '布尔型': 'Boolean',
 
   '系统配置不允许删除': 'System configuration is not allowed to be deleted'
 }

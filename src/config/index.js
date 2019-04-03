@@ -25,6 +25,10 @@ export default {
    */
   homeName: 'home',
   /**
+   * @description 针对列表页，默认每页显示记录数
+   */
+  pageSize: 15,
+  /**
    * @description 需要加载的插件
    */
   plugin: {

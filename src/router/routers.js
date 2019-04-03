@@ -218,7 +218,7 @@ const menus = [
         name: 'config',
         meta: {
           icon: 'md-cog',
-          title: '{{系统配置}}'
+          title: '{{配置管理}}'
         },
         component: () => import('@/view/system/setting/setting.vue')
       }

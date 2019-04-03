@@ -17,7 +17,7 @@
             </slot>
 
             <div class="demo-drawer-footer" v-if="footerHide===false" >
-              <i-button type="primary" @click="onOk">{{ this.okTitle }}</i-button>
+              <i-button type="primary" :loading="okLoading" @click="onOk">{{ this.okTitle }}</i-button>
               <i-button style="margin-left: 8px" @click="onCancel">{{ this.cancelTitle }}</i-button>
             </div>
         </Drawer>
@@ -37,7 +37,7 @@
 
             </slot>
             <div slot="footer" v-if="footerHide===false" >
-              <i-button type="primary" @click="onOk">{{ this.okTitle }}</i-button>
+              <i-button type="primary" :loading="okLoading" @click="onOk">{{ this.okTitle }}</i-button>
               <i-button style="margin-left: 8px" @click="onCancel">{{ this.cancelTitle }}</i-button>
             </div>
         </Modal>
@@ -92,6 +92,10 @@ export default {
       default: ''
     },
     footerHide: {
+      type: Boolean,
+      default: false
+    },
+    okLoading: {
       type: Boolean,
       default: false
     }
