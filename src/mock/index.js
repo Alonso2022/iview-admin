@@ -5,7 +5,7 @@ import { getMessageInit, getContentByMsgId, hasRead, removeReaded, restoreTrash,
 import { getJoinAuthList } from './system/join-up/data'
 import { getPlatformList } from './system/platform/data'
 import { getConfigList, delConfig, addConfig, updateConfig } from './system/setting/data'
-import { getDictionaryList } from './system/dictionary/data'
+import { query as dictionaryQuery, insert as dictionaryInsert, deleteById as dictionaryDeleteById, update as dictionaryUpdate } from './system/dictionary/data'
 
 // 配置Ajax请求延时，可用来测试网络延迟大时项目中一些效果
 Mock.setup({
@@ -43,6 +43,8 @@ Mock.mock(/\/sys\/update_config/, updateConfig)
 
 Mock.mock(/\/sys\/get_join_auth_list/, getJoinAuthList)
 Mock.mock(/\/sys\/get_platform_list/, getPlatformList)
-Mock.mock(/\/sys\/get_dictionary_list/, getDictionaryList)
-
+Mock.mock(/\/sysdictionary\/query/, dictionaryQuery)
+Mock.mock(/\/sysdictionary\/insert/, dictionaryInsert)
+Mock.mock(/\/sysdictionary\/deleteById/, dictionaryDeleteById)
+Mock.mock(/\/sysdictionary\/update/, dictionaryUpdate)
 export default Mock

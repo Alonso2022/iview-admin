@@ -1,159 +1,171 @@
 <template>
-    <div class="mainRooter">
+  <div class="mainRooter">
+    <Row :gutter="10" style="margin-bottom: 10px;">
+      <i-col :md="24" :lg="6">
+        <Input clearable :placeholder="$t('请输入关键字')" class="search-input" v-model="params.key" @keyup.enter.native="onSearch"/>
+      </i-col>
+      <i-col :md="24" :lg="18">
+        <Button @click="onSearch" class="search-btn" type="primary" icon="ios-search">{{this.$t('搜索')}}</Button>
 
-      <Row :gutter="10" style="margin-bottom: 10px;">
-          <i-col :md="24" :lg="6" >
-            <Input clearable :placeholder="$t('enter-search-key')" class="search-input" v-model="key"/>
-          </i-col>
-          <i-col :md="24" :lg="18" >
-            <Button
-                @click="onSearch"
-                class="search-btn"
-                type="primary"
-                icon="ios-search">{{this.$t('search')}}</Button>
+        <!-- 新增 -->
+        <my-panl
+          ref="myCreate"
+          displayMode="modal"
+          :panlTitle="createPanlTitle"
+          btnClass="extendBtn"
+          :buttonTitle="$t('创建')"
+          type="primary"
+          icon="md-add"
+          :okTitle="$t('提交')"
+          :cancelTitle="$t('取消')"
+          :okLoading="okLoading"
+          @onOk="onSubmit"
+          @onClickBefore="onCreate"
+        >
+          <!-- 创建表单 -->
+          <Form ref="formValidate" :model="editItem.formData" :rules="ruleValidate" :label-width="80">
+            <row :gutter="32">
+              <i-col span="24">
+                <FormItem :label="$t('编码')" prop="CODE">
+                  <i-input v-if="editItem.editIndex>-1" disabled v-model="editItem.formData.CODE" :placeholder="$t('编码')"/>
+                  <i-input v-else v-model="editItem.formData.CODE" :placeholder="$t('编码')"/>
+                </FormItem>
+              </i-col>
+            </row>
+            <row :gutter="32">
+              <i-col span="24">
+                <FormItem :label="$t('标题')" prop="TITLE">
+                  <i-input v-model="editItem.formData.TITLE" :placeholder="$t('标题')"/>
+                </FormItem>
+              </i-col>
+            </row>
 
-            <!-- 新增 -->
-            <my-panl
-              ref="myCreate"
-              displayMode="modal"
-              :panlTitle="createPanlTitle"
-              btnClass="extendBtn"
-              :buttonTitle="$t('create')"
-              type="primary"
-              icon="md-add"
-              :okTitle="$t('submit')"
-              :cancelTitle="$t('cancel')"
-              @onClickBefore="initCreatePanl"
-              @onOk="onSave"
-              className="dictionary"
-              :footerHide="true"
-              >
-              <div class="split">
-                <Split v-model="split1" >
-                  <div slot="left" class="split-pane">
+            <Row :gutter="32">
+              <i-col span="24">
+                <FormItem :label="$t('描述')" prop="DESCRIPTION">
+                  <i-input type="textarea" v-model="editItem.formData.DESCRIPTION" :rows="2" :placeholder="$t('描述')"/>
+                </FormItem>
+              </i-col>
+            </Row>
 
-                    <!-- 创建表单 -->
-                    <Form :model="editItem.formData">
-                        <row :gutter="32">
-                            <i-col span="24">
-                                <FormItem :label="$t('code')"  label-position="top">
-                                    <i-input v-model="editItem.formData.CODE" :placeholder="$t('code')" />
-                                </FormItem>
-                            </i-col>
-                        </row>
-                        <row :gutter="32">
-                            <i-col span="24">
-                                <FormItem :label="$t('title')"  label-position="top">
-                                    <i-input v-model="editItem.formData.TITLE" :placeholder="$t('title')" />
-                                </FormItem>
-                            </i-col>
-                        </row>
-                        <Row :gutter="32">
-                          <i-col span="24">
-                              <FormItem :label="$t('description')"  label-position="top">
-                                  <i-input type="textarea" v-model="editItem.formData.DESCRIPTION" :rows="4" :placeholder="$t('description')" />
-                              </FormItem>
-                            </i-col>
-                        </Row>
-                        <Divider dashed  />
-                        <Row :gutter="32">
-                          <i-col span="24">
-                                <FormItem :label="$t('dictionary-lang.ex1')" label-position="top">
-                                    <i-input v-model="editItem.formData.EX1" :placeholder="$t('dictionary-lang.ex1')" />
-                                </FormItem>
-                            </i-col>
-                        </Row>
-                        <Row :gutter="32">
-                          <i-col span="24">
-                                <FormItem :label="$t('dictionary-lang.ex2')" label-position="top">
-                                    <i-input v-model="editItem.formData.EX2" :placeholder="$t('dictionary-lang.ex2')" />
-                                </FormItem>
-                            </i-col>
-                        </Row>
-                        <Row :gutter="32">
-                          <i-col span="24">
-                                <FormItem :label="$t('dictionary-lang.ex3')" label-position="top">
-                                    <i-input v-model="editItem.formData.EX3" :placeholder="$t('dictionary-lang.ex3')" />
-                                </FormItem>
-                            </i-col>
-                        </Row>
-                        <Row :gutter="32">
-                          <i-col span="24">
-                                <FormItem :label="$t('dictionary-lang.ex4')" label-position="top">
-                                    <i-input v-model="editItem.formData.EX1" :placeholder="$t('dictionary-lang.ex4')" />
-                                </FormItem>
-                            </i-col>
-                        </Row>
-                        <Row :gutter="32">
-                          <i-col span="24">
-                                <FormItem :label="$t('dictionary-lang.ex5')" label-position="top">
-                                    <i-input v-model="editItem.formData.EX1" :placeholder="$t('dictionary-lang.ex5')" />
-                                </FormItem>
-                            </i-col>
-                        </Row>
+            <Row :gutter="32">
+              <i-col span="24">
+                <FormItem :label="$t('扩展1')" prop="EX1">
+                  <i-input v-model="editItem.formData.EX1" :placeholder="$t('扩展1')"/>
+                </FormItem>
+              </i-col>
+            </Row>
 
-                    </Form>
-                    <div style="text-align:right">
-                      <i-button type="primary" @click="onOk">{{ this.$t('save') }}</i-button>
-                    </div>
-                  </div>
-                  <div slot="right" class="split-pane">
+            <Row :gutter="32">
+              <i-col span="24">
+                <FormItem :label="$t('扩展2')" prop="EX2">
+                  <i-input v-model="editItem.formData.EX2" :placeholder="$t('扩展2')"/>
+                </FormItem>
+              </i-col>
+            </Row>
+            <Row :gutter="32">
+              <i-col span="24">
+                <FormItem :label="$t('扩展3')" prop="EX3">
+                  <i-input v-model="editItem.formData.EX3" :placeholder="$t('扩展3')"/>
+                </FormItem>
+              </i-col>
+            </Row>
+            <Row :gutter="32">
+              <i-col span="24">
+                <FormItem :label="$t('扩展4')" prop="EX4">
+                  <i-input v-model="editItem.formData.EX4" :placeholder="$t('扩展4')"/>
+                </FormItem>
+              </i-col>
+            </Row>
+            <Row :gutter="32">
+              <i-col span="24">
+                <FormItem :label="$t('扩展5')" prop="EX5">
+                  <i-input v-model="editItem.formData.EX5" :placeholder="$t('扩展5')"/>
+                </FormItem>
+              </i-col>
+            </Row>
+            <Divider style="margin-top:-20px;"/>
+            <Row :gutter="32">
+              <i-col span="12">
+                <FormItem :label="$t('创建人')" prop="CREATE_BY">
+                  <i-input disabled v-model="editItem.formData.CREATE_BY" :placeholder="$t('创建人')"/>
+                </FormItem>
+              </i-col>
+              <i-col span="12">
+                <FormItem :label="$t('创建时间')" prop="CREATE_ON">
+                  <DatePicker
+                    style="display:block"
+                    disabled
+                    format="yyyy-MM-dd HH:mm:ss"
+                    type="datetime"
+                    v-model="editItem.formData.CREATE_ON"
+                    :placeholder="$t('创建时间')"
+                  ></DatePicker>
+                </FormItem>
+              </i-col>
+            </Row>
 
-      <Table :columns="columns" :loading="loading" :data="data" @on-selection-change="onSelectionChange">
-           <template slot-scope="{ row }" slot="IS_DISABLE">
-              <i-switch v-model="row.IS_DISABLE" disabled  size="large">
-                <span slot="open">启用</span>
-                <span slot="close">禁用</span>
-              </i-switch>
-          </template>
+            <Row :gutter="32">
+              <i-col span="12">
+                <FormItem :label="$t('更新人')" prop="UPDATE_BY">
+                  <i-input disabled v-model="editItem.formData.UPDATE_BY" :placeholder="$t('更新人')"/>
+                </FormItem>
+              </i-col>
+              <i-col span="12">
+                <FormItem :label="$t('更新时间')" prop="UPDATE_ON">
+                  <DatePicker
+                    style="display:block"
+                    disabled
+                    format="yyyy-MM-dd HH:mm:ss"
+                    type="datetime"
+                    v-model="editItem.formData.UPDATE_ON"
+                    :placeholder="$t('更新时间')"
+                  ></DatePicker>
+                </FormItem>
+              </i-col>
+            </Row>
+          </Form>
+        </my-panl>
+      </i-col>
+    </Row>
 
-          <template slot-scope="{ row, index }" slot="action">
-
-            <ButtonGroup size="small" >
-              <Button @click="onEdit(row, index)"  icon="ios-create" type="primary"  :title="$t('edit')"></Button>
-              <Button @click="onDelete(row, index)"  icon="md-close" type="warning" :title="$t('delete')"></Button>
-            </ButtonGroup>
-          </template>
-      </Table>
-
-                  </div>
-                </Split>
-              </div>
-            </my-panl>
-
-            <!-- 批量删除 -->
-            <i-button @click="onDeleteSelected" type="warning" class="extendBtn" icon="md-close">{{this.$t('delete')}}</i-button>
-
-          </i-col>
-      </Row>
-
-      <Table :columns="columns" :loading="loading" :data="data" @on-selection-change="onSelectionChange">
-           <template slot-scope="{ row }" slot="IS_DISABLE">
-              <i-switch v-model="row.IS_DISABLE" disabled  size="large">
-                <span slot="open">启用</span>
-                <span slot="close">禁用</span>
-              </i-switch>
-          </template>
-
-          <template slot-scope="{ row, index }" slot="action">
-
-            <ButtonGroup size="small" >
-              <Button @click="onEdit(row, index)"  icon="ios-create" type="primary"  :title="$t('edit')"></Button>
-              <Button @click="onDelete(row, index)"  icon="md-close" type="warning" :title="$t('delete')"></Button>
-            </ButtonGroup>
-          </template>
-      </Table>
-      <div class="page">
-        <Page :total="total" :current="paras.currentPage" :page-size="paras.pageSize" @on-change="changePage" @on-page-size-change="changePageSize" size="small" show-total show-elevator show-sizer />
-      </div>
-
+    <Table :columns="columns" :loading="loading" :data="data">
+      <template slot-scope="{ row }" slot="Extend">
+        <span>{{row.EX1}}{{!row.EX2||row.EX2===''?'':","+row.EX2}}{{!row.EX3||row.EX3===''?'':","+row.EX3}}{{!row.EX4||row.EX4===''?'':","+row.EX4}}{{!row.EX5||row.EX5===''?'':","+row.EX5}}</span>
+      </template>
+      <template slot-scope="{ row, index }" slot="action">
+        <ButtonGroup size="small">
+          <Button @click="onEdit(row, index)" type="primary" :title="$t('编辑')">{{$t('编辑')}}</Button>
+          <Button
+            :disabled="row.CONFIG_TYPE === 'SYSTEM'"
+            @click="onDelete(row, index)"
+            type="error"
+            :title="row.CONFIG_TYPE === 'SYSTEM'?$t('系统配置不允许删除'):$t('删除')"
+          >{{$t('删除')}}</Button>
+        </ButtonGroup>
+      </template>
+    </Table>
+    <div v-if="total > params.pageSize" class="page">
+      <Page
+        :total="total"
+        :current="params.currentPage"
+        :page-size="params.pageSize"
+        @on-change="changePage"
+        @on-page-size-change="changePageSize"
+        size="small"
+        show-total
+        show-elevator
+        show-sizer
+      />
     </div>
+  </div>
 </template>
 
 <script>
 
-import { getDictionaryList } from '@/api/system/dictionary/data'
+import { query, insert, deleteById, update } from '@/api/system/dictionary/data'
 import MyPanl from '_c/@my-panl/my-panl.vue'
+// import dayjs from 'dayjs'
 export default {
   components: {
     MyPanl
@@ -162,273 +174,274 @@ export default {
     return {
       columns: [
         {
-          type: 'selection',
-          width: 50,
-          align: 'center',
-          // fixed: 'left',
-          className: 'action-column'
-        },
-        {
           title: '#',
           width: 40,
-          // fixed: 'left',
           className: 'action-column',
+          // fixed: 'left',
           render: (h, params) => {
-            return h('span', params.index + (this.paras.currentPage - 1) * this.paras.pageSize + 1)
+            return h('span', params.index + (this.params.currentPage - 1) * this.params.pageSize + 1)
           }
         },
         {
           key: 'CODE',
           sortable: true,
           // fixed: 'left',
+          width: 150,
           renderHeader: (h, params) => {
-            // 多语言切换 需要用到renderHeader
-            return h('span', this.$t('code'))
+            return h('span', this.$t('编码')) // 多语言切换 需要用到renderHeader 否则可以不用
           }
         },
         {
           key: 'TITLE',
           sortable: true,
+          // fixed: 'left',
           renderHeader: (h, params) => {
-            // 多语言切换 需要用到renderHeader
-            return h('span', this.$t('title'))
+            return h('span', this.$t('标题')) // 多语言切换 需要用到renderHeader 否则可以不用
           }
         },
         {
           key: 'DESCRIPTION',
-          sortable: true,
-          renderHeader: (h, params) => {
-            // 多语言切换 需要用到renderHeader
-            return h('span', this.$t('description'))
-          }
-        },
-        {
-          key: 'EX1',
-          sortable: false,
-          renderHeader: (h, params) => {
-            // 多语言切换 需要用到renderHeader
-            return h('span', this.$t('extend'))
-          },
-          render: (h, params) => {
-            // <i-switch v-model="row.enable" disabled  size="large">
-            let list = []
-            if (params.row.EX1 && params.row.EX1.trim() !== '') {
-              list.push(params.row.EX1)
-            }
-            if (params.row.EX2 && params.row.EX2.trim() !== '') {
-              list.push(params.row.EX2)
-            }
-            if (params.row.EX3 && params.row.EX3.trim() !== '') {
-              list.push(params.row.EX3)
-            }
-            if (params.row.EX4 && params.row.EX4.trim() !== '') {
-              list.push(params.row.EX4)
-            }
-            if (params.row.EX5 && params.row.EX5.trim() !== '') {
-              list.push(params.row.EX5)
-            }
-            return h('span', list.join(','))
-          }
-        },
-        {
-          title: this.$t('disable'),
-          slot: 'IS_DISABLE',
           sortable: false,
           renderHeader: (h, params) => {
             // 多语言切换 需要用到renderHeader 否则可以不用
-            return h('span', this.$t('disable'))
-          },
-          render: (h, params) => {
-            // <i-switch v-model="row.enable" disabled  size="large">
-            return h('i-switch', { props: { value: params.row.IS_DISABLE, disabled: 'disabled', size: 'small' } })
+            return h('span', this.$t('描述'))
           }
         },
         {
-          title: this.$t('operation'),
+          slot: 'Extend',
+          sortable: false,
+          renderHeader: (h, params) => {
+            return h('span', this.$t('扩展')) // 多语言切换 需要用到renderHeader 否则可以不用
+          }
+        },
+        {
           slot: 'action',
           // fixed: 'right',
-          width: 86,
+          width: 110,
           className: 'action-column',
           renderHeader: (h, params) => {
-            // 多语言切换 需要用到renderHeader 否则可以不用
-            return h('span', this.$t('operation'))
+            return h('span', this.$t('操作')) // 多语言切换 需要用到renderHeader 否则可以不用
           }
         }
       ],
       data: [],
-      split1: 0.2, // 创建 编辑 窗口拆分split面板比例
-      key: '', // 搜索关键字
+      formModel: {
+        CODE: '',
+        TITLE: '',
+        DESCRIPTION: '',
+        EX1: '',
+        EX2: '',
+        EX3: '',
+        EX4: '',
+        EX5: '',
+        CREATE_BY: '',
+        CREATE_ON: '',
+        UPDATE_BY: '',
+        UPDATE_ON: '',
+        ID: ''
+      },
+      ruleValidate: {
+        TITLE: [
+          { required: true, message: this.$t('标题') + this.$t('不能为空'), trigger: 'blur' }
+        ],
+        CODE: [
+          { required: true, message: this.$t('编码') + this.$t('不能为空'), trigger: 'blur' }
+        ]
+      },
       loading: false,
+      okLoading: false,
       selectedItems: [],
-      createPanlTitle: this.$t('create'),
+      createPanlTitle: this.$t('创建'),
       editItem: {
         editIndex: -1,
         formData: {}
       },
-
       total: 0,
-      paras: {
+      params: {
+        action: 'READ',
         currentPage: 1,
-        pageSize: 15,
-        filter: {}
-      },
-      displayPanl: false
+        pageSize: this.$config.pageSize,
+        key: '',
+        filter: {},
+        item: {}
+      }
     }
   },
   mounted () {
     this.getData()
   },
   methods: {
+    // Read 列表数据
     getData () {
       this.loading = true
-      getDictionaryList(this.paras).then(res => {
+      this.params.action = 'READ'
+      query(this.params).then(res => {
+        console.log(res)
         if (res.data.code === '1') {
           this.total = res.data.total
           this.data = res.data.data
         } else {
           this.$Notice.error({
-            title: this.$t('error'),
+            title: this.$t('错误'),
             desc: res.data.msg
           })
         }
         this.loading = false
+      }).catch((err) => {
+        this.$Notice.error({
+          title: this.$t('错误'),
+          desc: err
+        })
+        this.loading = false
       })
     },
-    getIndex (index) {
-      return this.paras.currentPage * this.paras.pageSize + index + 1
-    },
+    // 搜索按钮事件
     onSearch () {
-      if (this.key === '') {
-        this.$Message.error(this.$t('search-key-empty-msg'))
-        return
-      }
-      this.loading = true
-      // 提交数据到API
-      setTimeout(() => {
-        this.$Notice.success({
-          title: this.$t('success'),
-          desc: this.$t('server-response')
-        })
-        this.loading = false
-      }, 1000)
+      this.getData()
     },
-    onAdvancedSearch () {
-      this.loading = true
-      // 提交数据到API
-      setTimeout(() => {
-        this.$Notice.success({
-          title: this.$t('success'),
-          desc: this.$t('server-response')
-        })
-        this.loading = false
-      }, 1000)
-      // 关闭搜索窗口
-      this.$refs.mySearch.closePanl()
+    // 取的当前记录行号
+    getIndex (index) {
+      return this.params.currentPage * this.params.pageSize + index + 1
     },
-    // 初始化创建窗口 以去除编辑后留下的状态
-    initCreatePanl () {
-      this.createPanlTitle = this.$t('create')
+    // 执行删除 事件 （删除提示框中确认按钮事件）
+    execDelete (row, index) {
+      this.params.action = 'DELETE'
+      this.params.item = row
+      deleteById(row.ID).then(res => {
+        if (res.data.code === '1') {
+          this.data.splice(index, 1)
+          this.$Notice.success({
+            title: this.$t('成功'),
+            desc: this.$t('删除成功') + '(' + row.CODE + ')'
+          })
+        } else {
+          this.$Notice.error({
+            title: this.$t('错误'),
+            desc: res.data.msg
+          })
+        }
+        this.$Modal.remove()
+      }).catch((err) => {
+        this.$Notice.error({
+          title: this.$t('错误'),
+          desc: err
+        })
+        this.$Modal.remove()
+      })
+    },
+    // 创建按钮事件
+    onCreate () {
+      this.createPanlTitle = this.$t('创建')
       this.editItem = {
         editIndex: -1,
-        formData: {}
+        formData: this.formModel
       }
     },
+    // 编辑按钮 事件
     onEdit (row, index) {
       this.createPanlTitle = row.TITLE
       this.editItem = {
         editIndex: index,
         formData: JSON.parse(JSON.stringify(row))
       }
+      // this.formValidate = this.editItem.formData
       this.$refs.myCreate.openPanl()
     },
+    // 删除按钮 事件 （删除提示确认框）
     onDelete (row, index) {
       // 确认删除对话框
       this.$Modal.confirm({
-        title: this.$t('confirm-del'),
-        content: this.$t('confirm-del-content'),
-        onOk: this.execDelete,
+        title: this.$t('删除确认'),
+        content: this.$t('确认删除指定记录吗?'),
+        onOk: () => { this.execDelete(row, index) },
         loading: true,
-        okText: this.$t('delete'),
-        cancelText: this.$t('cancel')
+        okText: this.$t('删除'),
+        cancelText: this.$t('取消')
       })
     },
-    onDeleteSelected () {
-      if (!this.selectedItems.length) {
-        this.$Message.error(this.$t('need-select-least-one'))
-        return
-      }
-      this.$Modal.confirm({
-        title: this.$t('confirm-del'),
-        content: this.$t('confirm-del-content'),
-        onOk: this.execDelete,
-        loading: true,
-        okText: this.$t('delete'),
-        cancelText: this.$t('cancel')
-      })
-    },
-    execDelete () {
-      // 提交数据到API
-      setTimeout(() => {
-        this.$Notice.success({
-          title: this.$t('success'),
-          desc: this.$t('server-response')
-        })
-        // 关闭删除确认窗口
-        this.$Modal.remove()
-      }, 1000)
-    },
-    onSave () {
-      if (this.editItem.editIndex === -1) {
-        this.loading = true
-        // 提交数据到APIedit-success
-        setTimeout(() => {
-          this.$Notice.success({
-            title: this.$t('create-success'),
-            desc: this.$t('server-response')
-          })
-          this.loading = false
-        }, 1000)
-      } else {
-        this.loading = true
-        this.$set(this.data, this.editItem.editIndex, this.editItem.formData)
-        // 提交数据到API
-        setTimeout(() => {
-          this.$Notice.success({
-            title: this.$t('edit-success'),
-            desc: this.$t('server-response')
-          })
-          this.loading = false
-        }, 1000)
-      }
+    // 面板中 提交按钮事件
+    onSubmit () {
+      this.$refs['formValidate'].validate((valid) => {
+        if (valid) {
+          this.okLoading = true
+          this.params.action = 'CREATE'
 
-      // 关闭窗口
-      this.$refs.myCreate.closePanl()
-    },
-    onSetCols () {
-      this.$Notice.success({
-        title: this.$t('apply-success'),
-        desc: ''
+          this.params.item = this.editItem.formData
+
+          // const _vue = Vue
+
+          if (this.editItem.editIndex > -1) {
+            update(this.params).then(res => {
+              if (res.data.code === '1') {
+                // this.data[this.editItem.editIndex] = this.editItem.formData
+                this.$set(this.data, this.editItem.editIndex, this.params.item)
+                this.editItem.editIndex = -1
+                this.$Notice.success({
+                  title: this.$t('成功'),
+                  desc: this.$t('编辑成功') + '(' + this.params.item.CODE + ')'
+                })
+              } else {
+                this.$Notice.error({
+                  title: this.$t('错误'),
+                  desc: res.data.msg
+                })
+              }
+              this.loading = false
+              this.okLoading = false
+              // 关闭创建面板
+              this.$refs.myCreate.closePanl()
+            }).catch((err) => {
+              this.$Notice.error({
+                title: this.$t('错误1'),
+                desc: err
+              })
+              this.loading = false
+              this.okLoading = false
+            })
+          } else {
+            insert(this.params).then(res => {
+              if (res.data.code === '1') {
+                this.total = res.data.total
+                this.data = res.data.data
+                this.params.currentPage = 1 // 添加成功归页1
+                this.$Notice.success({
+                  title: this.$t('成功'),
+                  desc: this.$t('创建成功') + '(' + this.editItem.formData.CODE + ')'
+                })
+                // 关闭创建面板
+                // this.$refs.myCreate.closePanl()
+              } else {
+                this.$Notice.error({
+                  title: this.$t('错误'),
+                  desc: res.data.msg
+                })
+              }
+              this.okLoading = false
+            }).catch((err) => {
+              this.$Notice.error({
+                title: this.$t('错误'),
+                desc: err
+              })
+              this.okLoading = false
+            })
+          }
+        }
       })
-      this.$refs.myDisplayCols.closePanl()
     },
-    onSelectionChange (selection) {
-      this.selectedItems = selection
-    },
+    // 页码改变事件
     changePage (page) {
-      this.paras.currentPage = page
+      this.params.currentPage = page
       this.getData()
     },
+    // 每页显示记录数改变事件
     changePageSize (pageSize) {
-      this.paras.pageSize = pageSize
+      this.params.pageSize = pageSize
       this.getData()
     }
+
   }
 }
 </script>
 
-<style lang="less"  >
-.dictionary .ivu-modal-fullscreen .ivu-modal-body{    bottom: 0px;}
-.dictionary .ivu-modal-body{ padding:0}
-.dictionary .split{         height: 100%;    }
-.dictionary .split-pane{      height: 100%;   padding: 10px; overflow-x: hidden;  overflow-y: auto; }
+<style lang="less" scoped>
 </style>
